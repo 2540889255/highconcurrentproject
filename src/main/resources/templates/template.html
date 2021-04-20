@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>流量测试管理系统</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script type="text/javascript"  src="/layui/layui.js" ></script>
+    <script type="text/javascript"  src="/layui/layui_exts/tinymce/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript"  src="/layui/layui_exts/tinymce/tinymce.js" ></script>
+
+
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">系统界面</div>
+        <!-- 头部区域（可配合layui 已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">nav 1</a></li>
+            <li class="layui-nav-item"><a href="">nav 2</a></li>
+            <li class="layui-nav-item"><a href="">nav 3</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">nav groups</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">menu 11</a></dd>
+                    <dd><a href="">menu 22</a></dd>
+                    <dd><a href="">menu 33</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
+                    tester
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">set 1</a></dd>
+                    <dd><a href="">set 2</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">Sign out</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">功能</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="item">发布</a></dd>
+                        <dd><a href="itemlist">静态文件列表</a></dd>
+                        <dd><a href="template">模板管理</a></dd>
+                        <dd><a href="generateall">批量生成静态文件</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">拓展</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="generatemainitems">生成静态主页</a></dd>
+                        <dd><a href="mainitems.html" >查看静态首页</a></dd>
+                        <dd><a href="heath">健康检查</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="check">静态文件核查</a></li>
+                <li class="layui-nav-item"><a href="">the links</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+            <form action="/savetemplate" method="post">
+                <textarea name="content" id="edit" cols="30" rows="10">#(item)</textarea>
+
+                <script>
+                    layui.extend({
+                        tinymce: '{/}layui/layui_exts/tinymce/tinymce'
+                    }).use(['tinymce', 'util', 'layer'], function () {
+                        var tinymce = layui.tinymce
+                        var edit = tinymce.render({
+                            elem: "#edit"
+                            , height: 550
+                            , width:'100%'
+                        });
+                    });
+                </script>
+                <button   class="layui-btn">保存</button>
+            </form>
+
+
+
+
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        底部固定区域
+    </div>
+</div>
+
+
+<!--
+<script>
+    /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
+    layui.extend({
+        tinymce: '{/}layui/layui_exts/tinymce/tinymce'
+    }).use(['tinymce', 'util', 'layer'], function () {
+        var t = layui.tinymce
+        var util = layui.util;
+
+        var edit = t.render({
+            elem: "#edit"
+            , height: 550
+            // ...
+            // 其余配置可参考官方文档
+        },function(opt){
+            //加载完成后回调
+        });
+
+        t.render({
+            elem: "#edit2"
+            , height: 200
+        });
+
+        util.event('lay-event', {
+            getContent:function() {
+                var content = t.get('#edit').getContent()
+                layer.alert(content)
+            },
+            setContent:function() {
+                t.get('#edit').setContent('点击按钮设置的内容：<span style="color: #e03e2d;">' + new Date()+'</span>')
+            },
+            clearContent:function() {
+                t.get('#edit').setContent('')
+            },
+            insertContent:function() {
+                t.get('#edit').insertContent('<b>插入内容</b>')
+            },
+            getText:function() {
+                var text = t.get('#edit').getContent({format:'text'})
+                layer.alert(text)
+            },
+            reload:function() {
+                t.reload({
+                    elem:'#edit'
+                    // 所有参数都可以重新设置 ...
+                },function(opt){
+                    //重载完成后回调函数，会把所有参数回传，
+                    //重载仅仅重新渲染编辑器，不会清空textarea，可手动清空或设置
+                    t.get('#edit').setContent('')
+                })
+            },
+            destroy:function(){
+                t.get('#edit').destroy()
+            },
+            render:function(){
+                t.render({elem:'#edit',height:'500px'})
+            }
+        });
+
+
+    });
+
+</script>
+<style>
+    .tox .tox-dialog{
+        border: none;
+    }
+
+    .tox .tox-dialog,
+    .tox .tox-button,
+    .tox .tox-textarea,
+    .tox .tox-textfield,
+    .tox .tox-selectfield select,
+    .tox .tox-toolbar-textfield{
+        border-radius: 0;
+    }
+    .tox .tox-dialog-wrap__backdrop{
+        background-color: rgba(0, 0, 0, .3);
+    }
+</style>
+-->
+
+
+
+
+</body>
+
+
+
+</html>

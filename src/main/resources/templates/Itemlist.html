@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>流量测试管理系统</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script type="text/javascript"  src="/layui/layui.js" ></script>
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">系统界面</div>
+        <!-- 头部区域（可配合layui 已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">nav 1</a></li>
+            <li class="layui-nav-item"><a href="">nav 2</a></li>
+            <li class="layui-nav-item"><a href="">nav 3</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">nav groups</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">menu 11</a></dd>
+                    <dd><a href="">menu 22</a></dd>
+                    <dd><a href="">menu 33</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
+                    tester
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">set 1</a></dd>
+                    <dd><a href="">set 2</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">Sign out</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">功能</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="item">发布</a></dd>
+                        <dd><a href="itemlist">静态文件列表</a></dd>
+                        <dd><a href="template">模板管理</a></dd>
+                        <dd><a href="generateall">批量生成静态文件</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">拓展</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="generatemainitems">生成静态主页</a></dd>
+                        <dd><a href="mainitems.html" >查看静态首页</a></dd>
+                        <dd><a href="heath">健康检查</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="check">静态文件核查</a></li>
+                <li class="layui-nav-item"><a href="">the links</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>title</th>
+                <th>content</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            #for(item:items)
+            <tr>
+                <td>#(item.id)</td>
+                <td>#(item.title)</td>
+                <td>#(item.content)</td>
+                <td>
+                    <a type="button"  href="items?id=#(item.id)" class="layui-btn">查看动态预览</a>
+                    <a type="button"  href="item#(item.id).html" class="layui-btn layui-btn-normal">查看静态文件</a>
+                    <a type="button"  href="generate?id=#(item.id)" target="_blank"  class="layui-btn layui-btn-warm">生成静态文件</a>
+
+                </td>
+            </tr>
+            #end
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        底部固定区域
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+
+    function viewitembyid(){
+
+        var uri=$("#id").val();
+        alert(uri);
+        window.location.href=uri;
+    }
+    //对于itme创建的表单提交函数
+    /*layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            alert("提交")
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });*/
+</script>
+
+
+
+
+</body>
+</html>
